@@ -72,6 +72,11 @@ We welcome contributions from everyone. Here's how you can contribute:
 - Write and run tests to confirm your changes work as expected.
 - Update the documentation to reflect your changes if necessary.
 
+
+## Team and Development Practices
+- Learn about our [team's collaboration guidelines](docs/TEAM.md).
+- For our coding and workflow standards, see our [Best Practices](docs/BestPractices.md).
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
