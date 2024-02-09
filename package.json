@@ -2,6 +2,7 @@
   "name": "21xo-mvp",
   "version": "1.0.0",
   "scripts": {
+    "main": "index.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
