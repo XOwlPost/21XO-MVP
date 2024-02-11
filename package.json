@@ -8,12 +8,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "@thirdweb-dev/auth": "^4.1.32",
+    "@thirdweb-dev/react": "^4.4.8",
     "@thirdweb-dev/sdk": "^4.0.34",
     "@vercel/postgres": "^0.7.2",
     "@vercel/speed-insights": "^1.0.9",
     "cors": "^2.8.5",
+    "ethers": "5",
     "next": "^14.1.0",
+    "next-auth": "^4.24.5",
+    "prisma": "^5.9.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "swagger-ui-express": "^5.0.0"
   }
 }
