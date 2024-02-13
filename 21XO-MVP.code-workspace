@@ -5,8 +5,10 @@
         }
     ],
     "settings": {
-        "vercelVSCode.accessToken": "lheVa80KIFXoq6pZx78Qo05Q",
-        "vercelVSCode.projectId": "prj_C10RMoroFLUhacQMcHsTq5o1agD0",
-        "vercelVSCode.teamId": "team_vH5MMrAeIgwOXuVAqrBAUD9e"
+        "vercelVSCode.accessToken": "process.env.VERCEL_TOKEN",
+        "vercelVSCode.projectId": "process.env.PROJECT_ID_VERCEL",
+        "vercelVSCode.teamId": "process.env.TEAM_ID_VERCEL",
+        "WillLuke.nextjs.addTypesOnSave": true,
+        "WillLuke.nextjs.hasPrompted": true
     }
 }
