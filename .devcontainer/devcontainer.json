@@ -88,7 +88,6 @@
         "cweijan.vscode-mysql-client2",
         "TabNine.tabnine-vscode",
         "kleber-swf.unity-code-snippets",
-        "VisualStudioToolsForUnity.vstuc",
         "eppz.eppz-code"
     ]      
     "forwardPorts": [3000]
