@@ -17,8 +17,37 @@
         "dbaeumer.vscode-eslint",
         "ms-vscode-remote.remote-wsl",
         "ms-python.python",
-        "ms-python.vscode-pylance"
-      ]      
+        "ms-python.vscode-pylance",
+        "GitHub.codespaces",
+        "Trunk.io",
+        "ms-azuretools.vscode-docker",
+        "p1c2u.docker-compose",
+        "henriiik.docker-linter",
+        "formulahendry.docker-explorer",
+        "george3447.docker-run",
+        "satiromarra.vscode-php-test-explorer-docker",
+        "dunstontc.vscode-docker-syntax",
+        "cweijan.vscode-postgresql-client2",
+        "ms-ossdata.vscode-postgresql",
+        "ckolkman.vscode-postgres",
+        "inferrinizzard.prettier-sql-vscode",
+        "elushnikova.sequelize-snippets",
+        "cweijan.vscode-redis-client",
+        "rafoid.pg-utils",
+        "hoonoh.vscode-slonik-live-server",
+        "damms005.devdb",
+        "GlysisSoftware.glysis",
+        "nguyenngoclong.asdf",
+        "msnidal.precinct-sql",
+        "TensorCompanyLtd.explain-postgresql",
+        "tintinweb.solidity-visual-auditor",
+        "github.vscode-github-actions",
+        "me-dutour-mathieu.vscode-github-actions",
+        "VisualStudioToolsForUnity.vstuc",
+        "JasonAMartin.unity-game-dev-bundle",
+        "AvneeshAgarwal.thirdweb-snippets",
+        "GitHub.copilot"
+    ]      
     "forwardPorts": [3000]
   }
   
