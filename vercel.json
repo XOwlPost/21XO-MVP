@@ -60,7 +60,7 @@
     "remotePatterns": [
       {
         "protocol": "https",
-        "hostname": "",
+        "hostname": "gateway.storjshare.io",
         "port": "",
         "pathname": "/images/**"
       }
