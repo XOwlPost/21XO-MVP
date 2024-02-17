@@ -1,0 +1,44 @@
+name: Test Service Worker
+
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+  pull_request:
+    branches:
+      - main
+      - feature/**
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build the Application
+        run: yarn build
+
+      - name: Start the Application
+        run: yarn start &
+        # You may need a step here to wait for the server to fully start.
+        # This can be a simple sleep command or a more sophisticated script to check server readiness.
+
+
+      - name: Run Service Worker Tests
+        run: |
+          # Example test command. Replace with your actual test command.
+          curl --fail http://localhost:3000/service-worker.js
+          echo "Service worker test passed."
+        # Note: This is a basic example using curl to check the service worker file's existence.
+        # Adjust this to run your actual service worker tests, such as with Puppeteer or another testing framework.
