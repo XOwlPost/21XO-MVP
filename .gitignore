@@ -10,3 +10,11 @@ npm-debug.log*
 # IDE
 .vscode/
 .idea/
+
+*.lock
+
+yarn-error.log
+
+*.local
+
+.trunk/
