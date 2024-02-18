@@ -27,5 +27,3 @@ out/
 aws/
 # Local configuration files for local development and testing environments (create this yourself if you need it)
 .pre-commit-config.local.yaml
-
-tatus
