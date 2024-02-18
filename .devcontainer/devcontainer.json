@@ -14,21 +14,22 @@
   "postCreateCommand": "npm install",
   "remoteUser": "vscode",
   "extensions": [
-    "dbaeumer.vscode-eslint", // For JavaScript and TypeScript linting
-    "GitHub.codespaces", // For GitHub Codespaces
-    "ms-azuretools.vscode-docker", // For Docker support
-    "cweijan.vscode-postgresql-client2", // For PostgreSQL database management
-    "tintinweb.solidity-visual-auditor", // For Solidity development
-    "github.vscode-github-actions", // For GitHub Actions
-    "AvneeshAgarwal.thirdweb-snippets", // For Thirdweb development
-    "GitHub.copilot", // For AI-powered code completions
-    "streetsidesoftware.code-spell-checker", // For spell checking in code
-    "VisualStudioExptTeam.vscodeintellicode", // For AI-assisted code completions
-    "ms-python.python", // For Python support
-    "bmewburn.vscode-intelephense-client", // For PHP development
-    "NomicFoundation.hardhat-solidity", // For Solidity and Ethereum smart contract development
-    "redhat.vscode-yaml", // For YAML file support
-    "ms-dotnettools.vscode-dotnet-runtime" // For .NET runtime support
+    "dbaeumer.vscode-eslint",
+    "GitHub.codespaces",
+    "ms-azuretools.vscode-docker",
+    "cweijan.vscode-postgresql-client2",
+    "tintinweb.solidity-visual-auditor",
+    "github.vscode-github-actions",
+    "AvneeshAgarwal.thirdweb-snippets",
+    "GitHub.copilot",
+    "streetsidesoftware.code-spell-checker",
+    "VisualStudioExptTeam.vscodeintellicode",
+    "ms-python.python",
+    "bmewburn.vscode-intelephense-client",
+    "NomicFoundation.hardhat-solidity",
+    "redhat.vscode-yaml",
+    "ms-dotnettools.vscode-dotnet-runtime",
+    "eamodio.gitlens"
   ],
   "forwardPorts": [3000]
 }
