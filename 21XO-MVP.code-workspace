@@ -16,6 +16,10 @@
 
         ],
         "continue.enableTabAutocomplete": true,
-        "tabnine.receiveBetaChannelUpdates": true
+        "tabnine.receiveBetaChannelUpdates": true,
+        "github.codespaces.defaultExtensions": [
+            "GitHub.codespaces",
+            "GitHub.vscode-pull-request-github"
+        ]
     }
 }
