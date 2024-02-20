@@ -12,10 +12,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Vercel Action
-        uses: amondnet/vercel-action@v20
+      - name: Cache node modules
+        uses: actions/cache@v2
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Set in your repository secrets
-          team-id: ${{ secrets.TEAM_ID_VERCEL }} # Corrected based on your secrets naming
-          project-id: ${{ secrets.PROJECT_ID_VERCEL }} # Corrected based on your secrets naming
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Vercel Action
+        uses: amondnet/vercel-action@v25.1.1 # Ensure this points to the latest or a specific version that works for you
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          team-id: ${{ secrets.TEAM_ID_VERCEL }}
+          project-id: ${{ secrets.PROJECT_ID_VERCEL }}
           vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
+
+      - name: Notify team of deployment
+        if: always() # This ensures the step runs whether the previous step succeeded or failed
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
