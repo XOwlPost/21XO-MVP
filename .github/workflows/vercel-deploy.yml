@@ -16,6 +16,6 @@ jobs:
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Set in your repository secrets
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Also set in your repository secrets
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Also set in your repository secrets
+          team-id: ${{ secrets.TEAM_ID_VERCEL }} # Corrected based on your secrets naming
+          project-id: ${{ secrets.PROJECT_ID_VERCEL }} # Corrected based on your secrets naming
           vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
