@@ -1,0 +1,36 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# Top-level EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+trim_trailing_whitespace = true
+
+# Matches multiple files with brace expansion notation
+# Set indent style and size for JavaScript, JSON, HTML, CSS, and similar files
+[*.{js,json,html,css,scss,md}]
+indent_style = space
+indent_size = 2
+
+# Override for Python files
+[*.py]
+indent_style = space
+indent_size = 4
+
+# Override for Java files
+[*.java]
+indent_style = space
+indent_size = 4
+
+# Override for C++ files
+[*.{cpp,h}]
+indent_style = space
+indent_size = 4
+
+# Markdown files (Markdownlint often prefers no trailing whitespace)
+[*.md]
+trim_trailing_whitespace = false
