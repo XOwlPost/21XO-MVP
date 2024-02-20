@@ -16,6 +16,7 @@ npm-debug.log*
 .vercel
 # Logs
 yarn-error.log
+*.log
 # Build files
 *.lock
 yarn.lock
