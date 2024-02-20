@@ -18,6 +18,7 @@ npm-debug.log*
 yarn-error.log
 # Build files
 *.lock
+yarn.lock
 # Next.js
 .next/
 out/
