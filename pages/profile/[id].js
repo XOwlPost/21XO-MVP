@@ -1,14 +1,14 @@
-import { useContract } from '@thirdweb-dev/react';
-import { useEffect, useState } from 'react';
+import { useContract } from "@thirdweb-dev/react";
+import { useEffect, useState } from "react";
 
 const UserProfileBlockchain = ({ id }) => {
   const [userTokens, setUserTokens] = useState([]);
-  const contract = useContract('<Your-Contract-Address>');
+  const contract = useContract("<Your-Contract-Address>");
 
   useEffect(() => {
     const fetchUserTokens = async () => {
       // Example: Fetching user's token holdings from a smart contract
-      const tokens = await contract.call('getUserTokens', id);
+      const tokens = await contract.call("getUserTokens", id);
       setUserTokens(tokens);
     };
 
