@@ -2,9 +2,11 @@
   "name": "21xo-mvp",
   "version": "1.0.0",
   "scripts": {
-    "vercel-dev": "vercel dev",
-    "test": "jest",
-    "prepare": "husky install"
+    "main": "index.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "vercel-dev": "vercel dev"
   },
   "dependencies": {
     "@thirdweb-dev/auth": "^4.1.32",
@@ -27,26 +29,6 @@
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "babel-jest": "^29.7.0",
-    "husky": "^9.0.11",
-    "jest": "^29.7.0",
-    "jest-axe": "^8.0.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "lint-staged": "^15.2.2",
-    "playwright": "^1.41.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add ."
-    ],
-    "*.jsx": [
-      "eslint --fix",
-      "git add ."
-    ]
+    "jest": "^29.7.0"
   }
 }

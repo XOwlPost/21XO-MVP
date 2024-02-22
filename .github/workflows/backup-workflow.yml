@@ -1,0 +1,21 @@
+name: Backup Workspace
+
+on:
+  schedule:
+    - cron:  '0 */4 * * *' # Runs every 4 hours
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Configure Git
+      run: |
+        git config --global user.name 'XOwlPost'
+        git config --global user.email 'xofidelius@gmail.com'
+    - name: Commit and Push Backup
+      run: |
+        git pull origin main
+        git add .
+        git commit -m "Automated backup $(date)"
+        git push origin main
