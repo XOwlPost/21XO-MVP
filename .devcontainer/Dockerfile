@@ -1,6 +1,9 @@
 # Use Miniconda base image
 FROM continuumio/miniconda3
 
+# Install Node.js and npm via Conda
+RUN conda install -c conda-forge nodejs
+
 # Copy the environment.yml file into the container to define your Conda environment
 COPY environment.yml /tmp/environment.yml
 
