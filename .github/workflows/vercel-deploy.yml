@@ -1,4 +1,4 @@
-name: Deploy to Vercel
+name: Continuous Integration and Deployment
 
 on:
   push:
@@ -7,8 +7,30 @@ on:
       - feature/**
 
 jobs:
+  lint-dockerfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Hadolint
+        uses: hadolint/hadolint-action@v1.5.0
+        with:
+          dockerfile: Dockerfile
+
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: lint-dockerfile
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: docker build -t my-image:latest .
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.0.20
+        with:
+          image-ref: 'my-image:latest'
+
   deploy:
     runs-on: ubuntu-latest
+    needs: security-scan
     steps:
       - uses: actions/checkout@v2
 
@@ -20,8 +42,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - name: Use Sepolia Private Key
+        run: |
+          echo "Deploying to Sepolia network with private key..."
+          # Insert commands here that utilize the SEPOLIA_PRIVATE_KEY for deployment or other purposes
+        env:
+          SEPOLIA_PRIVATE_KEY: ${{ secrets.SEPOLIA_PRIVATE_KEY }}
+
       - name: Vercel Action
-        uses: amondnet/vercel-action@v25.1.1 # Ensure this points to the latest or a specific version that works for you
+        uses: amondnet/vercel-action@v25.1.1
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           team-id: ${{ secrets.TEAM_ID_VERCEL }}
@@ -29,7 +58,7 @@ jobs:
           vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
 
       - name: Notify team of deployment
-        if: always() # This ensures the step runs whether the previous step succeeded or failed
+        if: always()
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}

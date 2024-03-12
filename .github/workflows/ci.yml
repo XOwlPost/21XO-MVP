@@ -1,0 +1,88 @@
+jobs:
+    security_checks:
+      runs-on: ubuntu-latest  
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+  
+        - name: Setup Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: '3.x'
+  
+        - name: Cache Python dependencies
+          uses: actions/cache@v2
+          with:
+            path: ~/.cache/pip
+            key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+            restore-keys: |
+              ${{ runner.os }}-pip-
+  
+        - name: Install and Run Terrascan
+          run: |
+            pip install terrascan
+            terrascan scan -d ./ -t aws
+          # This step installs Terrascan and runs a scan on the AWS resources defined in the repository.
+  
+        # Add similar steps for Checkov, Ivy, and any other tools, adjusting the installation and execution commands as necessary.
+        # Remember to add the installation step for each tool and then execute it against your codebase.
+  
+        # Example step for Checkov (assuming it's needed):
+        - name: Install and Run Checkov
+          run: |
+            pip install checkov
+            checkov -d .
+  
+        - name: Paths Filter (example for changed paths)
+          uses: dorny/paths-filter@v2
+          with:
+            filters: 'src/**,test/**'
+          # This step uses the paths-filter action to determine if subsequent steps should run based on changes in src or test directories.
+        
+          - name: Check for TODO comments
+          on: [push, pull_request]
+          
+          jobs:
+            check:
+              runs-on: ubuntu-latest
+              steps:
+                - name: Checkout code
+                  uses: actions/checkout@v2
+                
+                - name: Run TODO check
+                  run: |
+                    # Fetch the full history so diffs can be made against the main branch
+                    git fetch --no-tags --prune --depth=50 origin +refs/heads/main:refs/remotes/origin/main
+                    # This script checks for TODO comments added in the diffs against the main branch.
+                    git diff origin/main...HEAD | grep -i "TODO"
+                    if [ $? -eq 0 ]; then
+                      echo "New TODO comments found in the diff."
+                      exit 1
+                    else
+                      echo "No new TODO comments in the diff."
+                    fi
+          
+  
+        - name: git diff --check
+          uses: joel-coffman/action-git-diff-check@0.1.1
+          # This action checks for conflict markers and whitespace errors in the git diff output.
+  
+        - name: No new @ts-nocheck
+          uses: tanmayairbase/tscheck-action-shell@6.0.0
+          # This action checks for new @ts-nocheck comments introduced in TypeScript files.
+
+          - name: Install Trunk CLI
+          run: |
+            yarn global add trunk-cli
+            trunk init
+          env:
+            TRUNK_ACCESS_TOKEN: ${{ secrets.TRUNK_API_KEY }}
+        
+        
+        - name: Run Trunk Checks
+          run: |
+            trunk pull --all
+            trunk check --all
+            trunk push --all
+          # Adjust these commands based on the actual usage and options available in Trunk CLI.
+        

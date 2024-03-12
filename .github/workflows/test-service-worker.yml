@@ -1,15 +1,3 @@
-name: Test Service Worker
-
-on:
-  push:
-    branches:
-      - main
-      - feature/**
-  pull_request:
-    branches:
-      - main
-      - feature/**
-
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -21,7 +9,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '20.9.0' # Specify Node.js LTS version
 
       - name: Install Dependencies
         run: yarn install
@@ -30,15 +18,19 @@ jobs:
         run: yarn build
 
       - name: Start the Application
-        run: yarn start &
-        # You may need a step here to wait for the server to fully start.
-        # This can be a simple sleep command or a more sophisticated script to check server readiness.
+        run: yarn start & echo $! > PID.file
 
-
-      - name: Run Service Worker Tests
+      - name: Wait for Server to Start
         run: |
-          # Example test command. Replace with your actual test command.
-          curl --fail http://localhost:3000/service-worker.js
-          echo "Service worker test passed."
-        # Note: This is a basic example using curl to check the service worker file's existence.
-        # Adjust this to run your actual service worker tests, such as with Puppeteer or another testing framework.
+          until curl --output /dev/null --silent --head --fail http://localhost:3000; do
+            printf '.'
+            sleep 1
+          done
+
+      - name: Run Service Worker Tests with Puppeteer
+        run: node test-service-worker.js
+
+      - name: Cleanup
+        if: always()
+        run: |
+          kill $(cat PID.file)

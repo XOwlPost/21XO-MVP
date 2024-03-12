@@ -2,16 +2,12 @@
   "name": "21XO-MVP",
   "build": {
     "dockerfile": "Dockerfile",
-    "context": "..",
-    "args": {
-      "VARIANT": "11",
-      "INSTALL_NODE": "true"
-    }
+    "context": ".."
   },
   "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+    "terminal.integrated.defaultProfile.linux": "bash"
   },
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "echo 'Remember to manually create and activate the Conda environment, then install JupyterLab and npm packages'",
   "remoteUser": "vscode",
   "extensions": [
     "dbaeumer.vscode-eslint",
@@ -29,7 +25,10 @@
     "NomicFoundation.hardhat-solidity",
     "redhat.vscode-yaml",
     "ms-dotnettools.vscode-dotnet-runtime",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode-remote.remote-wsl"
   ],
-  "forwardPorts": [3000]
+  "forwardPorts": [3000, 8888]
 }
+
