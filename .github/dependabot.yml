@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # JavaScript (npm/yarn) dependencies in the root directory
+  - package-ecosystem: "npm"
+    directory: "/" # Root directory where package.json and package-lock.json/yarn.lock are located
+    schedule:
+      interval: "daily"
+    # Optional: Open pull requests only for major version updates
+    allow:
+      - dependency-type: "direct"
+        update-types: ["version-update:semver-major"]
+
+  # Python (pip) dependencies in a subdirectory (e.g., 'backend/')
+  - package-ecosystem: "pip"
+    directory: "/backend/" # Directory where the Python project and its 'requirements.txt' or 'Pipfile' are located
+    schedule:
+      interval: "daily"
+    # Optional: Open pull requests for both direct and indirect (transitive) dependency updates
+    allow:
+      - dependency-type: "all"
+
+  # Add more ecosystems as needed
+  # - package-ecosystem:...
