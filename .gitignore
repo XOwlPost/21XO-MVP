@@ -1,15 +1,32 @@
 # Node.js
 node_modules/
 npm-debug.log*
-
+# Workspace specific files
+21XO-MVP.code-workspace
 # Environment variables
 .env
-.env.local
+.env*.local
 .env.development
 .env.test
 # IDE
 .vscode/
 .idea/
+.env*.local
+.vercel
+# Logs
+yarn-error.log
+# Build files
+package-lock.json
+# Next.js
+.next/
+out/
+# Local server
+*.local
+.trunk/
+# Package Manager Files
+aws/
+# Local configuration files for local development and testing environments (create this yourself if you need it)
+.pre-commit-config.local.yaml
 
 *.lock
 
