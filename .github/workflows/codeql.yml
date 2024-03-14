@@ -1,0 +1,76 @@
+name: "CodeQL"
+
+on:
+  push:
+    branches: [ "main", "preview", "feature/**", "backup-branch", "hotfix/**", "release/**", "version/**" ]
+  pull_request:
+    branches: [ "main", "preview", "feature/**", "backup-branch", "hotfix/**", "release/**", "version/**" ]
+  schedule:
+    - cron: '0 14 * * 1'  # Run at 14:00 UTC every Monday
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript', 'typescript', 'python', 'java', ]
+        # CodeQL supports ['javascript', 'typescript', 'python', 'java', 'csharp', 'go', 'cpp', 'ruby']
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+
+    # Replace the Autobuild step with custom build commands
+    - name: Custom Build Step
+      run: |
+       name: Build Project
+
+on:
+  push:
+    branches: [ main, feature/** ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: myenv
+        environment-file: environment.yml
+        python-version: 3.x
+        auto-activate-base: false
+
+    - name: Install Node.js via Conda
+      run: |
+        conda install -c conda-forge nodejs
+        node --version
+        npm --version
+
+    - name: Install Yarn via npm
+      run: npm install -g yarn
+
+    - name: Install Dependencies
+      run: yarn install
+
+    - name: Build Project
+      run: yarn build
+
+      # If you have different build commands for different languages, you can conditionally run them:
+      # if: matrix.language == 'javascript' || matrix.language == 'typescript'
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
