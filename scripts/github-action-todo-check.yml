@@ -1,0 +1,22 @@
+name: Check for TODO comments
+on: [push, pull_request]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Run TODO check
+        run: |
+          # Fetch the full history so diffs can be made against the main branch
+          git fetch --no-tags --prune --depth=50 origin +refs/heads/main:refs/remotes/origin/main
+          # This script checks for TODO comments added in the diffs against the main branch.
+          git diff origin/main...HEAD | grep -i "TODO"
+          if [ $? -eq 0 ]; then
+            echo "New TODO comments found in the diff."
+            exit 1
+          else
+            echo "No new TODO comments in the diff."
+          fi
