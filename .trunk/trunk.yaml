@@ -1,0 +1,34 @@
+runtimes:
+  enabled:
+    - node@20.9.0
+    - python@3.10.8
+
+lint:
+  disabled:
+    - checkov
+    - hadolint
+  enabled:
+    - actionlint@2.0.6
+    - gitleaks@1.0.0
+    - codespell@1.1.7
+    - cspell@8.3.2
+    - git-diff-check
+    - markdownlint@0.33.0
+    - osv-scanner@1.6.2
+    - prettier@3.2.5
+    - terrascan@1.18.11
+    - trivy@0.49.1
+    - trufflehog@0.0.5
+    - yamllint@1.34.0
+    # Example addition for TypeScript linting
+    - eslint@8.57.0 # Assuming this version supports your TypeScript setup
+
+actions:
+   enabled:
+    - npm-check
+    - trunk-upgrade-available
+    - trunk-announce
+    - trunk-check-pre-push
+    - trunk-fmt-pre-commit
+    # Assuming yarn is used for package management
+    - yarn-check

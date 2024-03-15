@@ -1,3 +1,82 @@
 {
-    "version": 2
+  "devCommand": "next dev",
+  "buildCommand": "next build",
+  "installCommand": "npm install",
+  "headers": [
+    {
+      "source": "/service-worker.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "query",
+          "key": "authorized"
+        }
+      ],
+      "headers": [
+        {
+          "key": "x-authorized",
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "api/test.js": {
+      "memory": 3008,
+      "maxDuration": 30
+    },
+    "api/*.js": {
+      "memory": 3008,
+      "maxDuration": 30
+    }
+  },
+  "images": {
+    "sizes": [256, 640, 1080, 2048, 3840],
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "gateway.storjshare.io",
+        "port": "",
+        "pathname": "/images/**"
+      }
+    ],
+    "minimumCacheTTL": 60,
+    "formats": ["image/webp"],
+    "dangerouslyAllowSVG": false,
+    "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+    "contentDispositionType": "inline"
+  },
+  "outputDirectory": "build",
+  "public": true,
+  "rewrites": [
+    {
+      "source": "/proxy/:match*",
+      "destination": "https://21xo.com/:match*"
+    }
+  ]
 }

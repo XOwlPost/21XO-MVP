@@ -1,0 +1,36 @@
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.9.0' # Specify Node.js LTS version
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build the Application
+        run: yarn build
+
+      - name: Start the Application
+        run: yarn start & echo $! > PID.file
+
+      - name: Wait for Server to Start
+        run: |
+          until curl --output /dev/null --silent --head --fail http://localhost:3000; do
+            printf '.'
+            sleep 1
+          done
+
+      - name: Run Service Worker Tests with Puppeteer
+        run: node test-service-worker.js
+
+      - name: Cleanup
+        if: always()
+        run: |
+          kill $(cat PID.file)
