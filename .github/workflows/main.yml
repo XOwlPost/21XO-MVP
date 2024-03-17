@@ -1,0 +1,40 @@
+# name: Lint and Build
+
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+  pull_request:
+
+jobs:
+  lint-dockerfiles:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Lint Dockerfile in root directory
+      - name: Lint Root Dockerfile
+        uses: hadolint/hadolint-action@v1.5.0
+        with:
+          dockerfile: ./Dockerfile
+
+      # Lint Dockerfile in .devcontainer directory
+      - name: Lint Devcontainer Dockerfile
+        uses: hadolint/hadolint-action@v1.5.0
+        with:
+          dockerfile: ./.devcontainer/Dockerfile
+
+  build:
+    needs: lint-dockerfiles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Docker Image from Root
+        run: |
+          docker build -t my-app:latest .
+
+      - name: Build Docker Image from .devcontainer
+        run: |
+          docker build -f ./.devcontainer/Dockerfile -t my-devcontainer:latest .
